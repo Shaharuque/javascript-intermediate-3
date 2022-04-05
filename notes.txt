@@ -1,0 +1,183 @@
+35-1 Module Overview, Dynamic data types:
+35-2 Primitive data type and non-primitive data type:
+/*js datatypes:
+1.Number
+2.string
+3.boolean
+4.null
+5.undefined
+6.symbol
+7.object*/
+datatypes divided into 2 catagory:
+1.primitive type->jader moddhey only single value thakey
+1.Number
+2.string
+3.boolean
+4.null
+5.undefined
+6.symbol
+
+2.non primitive-> object(multi value),array
+
+35-3 Different Truthy and Falsy values in JavaScript:
+
+// --------Truthy------------
+/*// const x=2
+// const x="shaaik"
+// const x="0" any positive or negative number or string or only single white space or empty array[] or empty object{} will show truthy 
+//const x=true  */
+
+//-------falsy------------
+//const x=0       //for 0 value of x will show falsy
+//const x=""        //for empty string will show falsy
+//const x=false       //false is also falsy
+// let x           
+// console.log(x)        //undefine is also falsy 
+//const x=null             //null is falsy
+
+let x=parseInt('shaaik')
+console.log(x)       //will show NaN and NaN is falsy as well
+
+if(x){    //using this 'truthy falsy' concept i don't need to write if(x=="") menas if x== null then do something i can simply write if(x){do something}
+    console.log('truthy')
+}
+else{
+    console.log('falsy')
+}
+
+
+35-4 Null Vs Undefined, different ways you will get undefined:
+/*when we can get undefined
+1.varible value not assigned
+2.function but did not write return
+3. return nothing(returnable function)
+4.parameter isn't passed to function
+5.property that doesn't exist in the object but want to access that property gives undefined
+6.explicitly set value to undefined gives undefined 
+*/ 
+
+Remember: null means rightnow it has no value but undefined means lots of things but null and undefined both falsy
+
+35-5 double equal (==) vs triple equal (===), implicit conversion:
+//double equal (==) vs triple equal (===), implicit conversion
+//== (double equal)
+//== only checks value is equal or not but it doesn;t check its type ,type doesn;t matter here
+const i=2
+const j='2'
+
+if(i==j){
+    console.log('i and j same ') //here,it will be the result
+}
+else{
+    console.log('i and j is not same')
+}
+
+//-----------------
+//===(triple equal)
+//===  checks value is equal or not and it also check its type is same or not
+const a=2
+const b='2'
+if(a===b){
+    console.log('a and b same ')
+}
+else{
+    console.log('a and b is not same')//here,it will be the result
+}
+
+##Remember: implicit conversion in JS
+const a=5
+const b='6'
+if(a<b){
+    console.log('b is greater')  //hete a is number but b is string, In JS implicitly b converted to a number then the comparasion is done
+}
+else{
+    console.log('a is greater')
+}
+
+//so now 90% jaaigae we will use ===(triple equal)
+
+35-6 Block scope, global scope, Hoisting:
+global can be used in every where but local cann't
+
+35-7 (advanced) Closure, encapsulation, private variable:
+closure:- A closure gives you access to an outer function’s scope from an inner function(ekta function thekey arekta function return korley tahley tara ekta encapsulation ba private refrence create korey this is closure)
+example:
+
+//remember: A closure gives you access to an outer function’s scope from an inner function and using that inner function or object methods, outter scope can be modified but from outside outer scope cann;t be modified or accessed this concept is called closure.
+
+function watch(){
+    let counter=0
+    return function(c){
+        // let counter=0
+        counter+=c
+        return counter
+    }
+}
+
+let run1=watch()    //'run1' return hisabey function pabey
+console.log(run1(2))//output 2  //as return hisabey run1 function paisey so i can call that function by run1()
+console.log(run1(2))//output 4 (as counter ar value internally 2 save hoye asey so (2+2))
+console.log(run1(2))//output 6 (as counter is a outer function scope and inner function already called 2 times so counter ar value internally 4 save hoye asey so output:4+2=6 when 3rd time inner function is called this happens bcz A closure gives you access to an outer function’s scope from an inner function)
+
+
+//newly called 
+let run2=watch() 
+console.log(run2(2))//2
+
+35-8 (advanced) Callback function and pass different functions
+
+function ar parameter hisabey function send kora jay and sei function call o kora jay.parameter hisabey kono function a function pathanor por sei parameter hisabey pathano function call kora k boley call back function.
+
+Example:
+function outer(callinginner){
+    console.log(typeof(callinginner)) //function
+    //now i can call the inner function from here
+    callinginner('shaik')
+}
+
+function inner(name){
+    console.log(`hi i am from inner-${name}`)
+}
+
+outer(inner)  //outer function call and parameter hisabey inner function send
+
+35-9 Module summary pass by reference pass by value:
+##array check i mean kono kicho ki array kina ta check korar way:
+let num=[1,2,3]
+Array.isArray(num)  //true or false return korey
+
+## pass by reference
+function passByReference(myObj){
+    // myObj.name='korim'
+    myObj=8
+}
+
+// const myObj={name:'shaik',id:01,age:42}
+// passByReference(myObj)
+// console.log(myObj)  //output will be:{ name: 'korim', id: 1, age: 42 } here, we can see name properties value has changed bcz object is non-primitive type and this is called pass-by-reference
+
+const myObj=7
+passByReference(myObj)
+console.log(myObj)//output will be 7 here we can see myObj value has not change tho we changed inside function its bcz Number is primitive data type
+
+
+
+//JS hoisting:
+When the JavaScript engine executes the JavaScript code, it creates the global execution context. The global execution context has two phases: creation and execution.
+During the creation phase, the JavaScript engine moves the variable and function declarations to the top of your code. This feature is known as hoisting in JavaScript.
+
+hoisting ar summary:
+The JavaScript engine moves the variable and function declarations to the top of your code. This feature is known as hoisting in JavaScript.
+
+## remember: const and let block scope create korey but var block scope ignore korey hoist hoye erdom oporey choley jay
+
+1.JavaScript hoisting occurs during the creation phase of the execution context that moves the variable and function declarations to the top of the script.
+
+2.The JavaScript engine hoists the variables declared using the let keyword, but it doesn’t initialize them as the variables declared with the var keyword.
+
+3.The JavaScript engine doesn’t hoist the function expressions and arrow functions.
+
+
+//scope chaining:
+Scope chain: Whenever our code tries to access a variable during the function call, it starts the searching from local variables. And if the variable is not found, it'll continue searching in its outer scope or parent functions' scope until it reaches the global scope and completes searching for the variable there.
+
